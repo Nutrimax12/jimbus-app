@@ -3,28 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JIMBUS - Gestión sencilla de clientes y prospectos">
   <title>JIMBUS</title>
+  <link rel="stylesheet" href="styles.css">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111827">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 </head>
+
 <body>
 
-  <header>
-    <h1>JIMBUS</h1>
-    <p>Tus clientes y prospectos, organizados.</p>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">J</div>
+      <div>
+        <h1>JIMBUS</h1>
+        <p>Clientes y prospectos</p>
+      </div>
+    </div>
+
+    <button id="logoutBtn" class="logout-button">Cerrar sesión</button>
   </header>
 
-  <main>
-    <section>
-      <h2>Acceso</h2>
+  <main class="container">
 
-      <label>Correo electrónico</label>
-      <input type="email" id="loginEmail">
+    <section class="dashboard-head">
+      <div>
+        <h2>Mis contactos</h2>
+        <p>Organiza clientes, prospectos y seguimientos de tu negocio.</p>
+      </div>
 
-      <label>Contraseña</label>
-      <input type="password" id="loginPassword">
-
-      <button id="loginBtn">Iniciar sesión</button>
+      <button id="newContactBtn" class="primary-action">
+        + Nuevo contacto
+      </button>
     </section>
+
+    <section class="stats">
+
+      <div class="stat-card">
+        <span id="clientCount">0</span>
+        <p>Clientes</p>
+      </div>
+
+      <div class="stat-card">
+        <span id="prospectCount">0</span>
+        <p>Prospectos</p>
+      </div>
+
+      <div class="stat-card">
+        <span id="followupCount">0</span>
+        <p>Seguimientos</p>
+      </div>
+
+    </section>
+
+    <section class="filters">
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Buscar negocio, persona, teléfono o ciudad..."
+      >
+
+      <select id="typeFilter">
+        <option value="">Todos</option>
+        <option value="Cliente">Clientes</option>
+        <option value="Prospecto">Prospectos</option>
+      </select>
+    </section>
+
+    <section id="contactList" class="contact-list"></section>
+
+    <section id="emptyState" class="empty-state">
+      <div class="empty-icon">👥</div>
+      <h3>Aún no tienes contactos</h3>
+      <p>Agrega tu primer cliente o prospecto para comenzar.</p>
+      <button id="emptyNewBtn" class="primary-action">
+        Agregar contacto
+      </button>
+    </section>
+
   </main>
 
+  <div id="contactModal" class="modal hidden">
+
+    <div class="modal-card">
+
+      <div class="modal-head">
+        <h3 id="modalTitle">Nuevo contacto</h3>
+        <button id="closeModalBtn" class="close-button">×</button>
+      </div>
+
+      <form id="contactForm">
+
+        <input type="hidden" id="contactId">
+
+        <label for="businessName">Nombre del negocio *</label>
+        <input id="businessName" required>
+
+        <label for="contactName">Persona de contacto *</label>
+        <input id="contactName" required>
+
+        <label for="phone">Teléfono *</label>
+        <input id="phone" type="tel" required>
+
+        <label for="city">Ciudad</label>
+        <input id="city">
+
+        <label for="zone">Zona / barrio</label>
+        <input id="zone">
+
+        <label for="contactType">Tipo *</label>
+        <select id="contactType" required>
+          <option value="Cliente">Cliente</option>
+          <option value="Prospecto">Prospecto</option>
+        </select>
+
+        <label for="nextFollowup">Próximo seguimiento</label>
+        <input id="nextFollowup" type="date">
+
+        <label for="notes">Nota</label>
+        <textarea
+          id="notes"
+          rows="3"
+          placeholder="Ej. Volver a llamar, pidió catálogo, interesado..."
+        ></textarea>
+
+        <button type="submit" class="primary-button">
+          Guardar contacto
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js");
+    });
+  }
+</script>
 </body>
 </html>

@@ -1,0 +1,18 @@
+{
+  "name": "JIMBUS",
+  "short_name": "JIMBUS",
+  "description": "Gestión sencilla de clientes y prospectos para pequeños negocios.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f7fb",
+  "theme_color": "#111827",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
