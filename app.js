@@ -188,7 +188,7 @@
       } else {
         location.reload();
       }
-    });
+    }
   }
 
   async function loadContacts() {
