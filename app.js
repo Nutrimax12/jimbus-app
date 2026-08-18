@@ -211,26 +211,31 @@
     const search = $("searchInput").value.trim().toLowerCase();
     const type = $("typeFilter").value;
 
-    const filtered = contacts.filter(c => {
-      const matchesSearch =
-        !search ||
-        Object.values(c).some(v =>
-          String(v || "").toLowerCase().includes(search)
-        );
+    const today = new Date().toISOString().split("T")[0];
 
-      const matchesType =
-        !type || c.contactType === type;
+const filtered = contacts.filter(c => {
+  const matchesSearch =
+    !search ||
+    Object.values(c).some(v =>
+      String(v || "").toLowerCase().includes(search)
+    );
 
-      return matchesSearch && matchesType;
-    });
+  const matchesType =
+    !type || c.contactType === type;
+
+  const matchesFollowup =
+    !window.showPendingFollowups ||
+    (c.nextFollowup && c.nextFollowup <= today);
+
+  return matchesSearch && matchesType && matchesFollowup;
+});
+      
 
     $("clientCount").textContent =
       contacts.filter(c => c.contactType === "Cliente").length;
 
     $("prospectCount").textContent =
       contacts.filter(c => c.contactType === "Prospecto").length;
-
-    const today = new Date().toISOString().split("T")[0];
 
 $("followupCount").textContent =
   contacts.filter(c =>
@@ -468,6 +473,12 @@ $("followupCount").textContent =
       closeModal();
     }
   });
+window.showPendingFollowups = false;
+
+$("followupCount").parentElement.onclick = () => {
+  window.showPendingFollowups = !window.showPendingFollowups;
+  render();
+};
 
   await loadContacts();
 })();
