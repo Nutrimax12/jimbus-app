@@ -482,6 +482,15 @@ if (followupCard) {
 
   followupCard.onclick = () => {
     window.showPendingFollowups = !window.showPendingFollowups;
+
+    if (window.showPendingFollowups) {
+      followupCard.style.outline = "2px solid #111827";
+      followupCard.style.background = "#f3f4f6";
+    } else {
+      followupCard.style.outline = "none";
+      followupCard.style.background = "";
+    }
+
     render();
   };
 }
