@@ -230,8 +230,12 @@
     $("prospectCount").textContent =
       contacts.filter(c => c.contactType === "Prospecto").length;
 
-    $("followupCount").textContent =
-      contacts.filter(c => c.nextFollowup).length;
+    const today = new Date().toISOString().split("T")[0];
+
+$("followupCount").textContent =
+  contacts.filter(c =>
+    c.nextFollowup && c.nextFollowup <= today
+  ).length;
 
     $("emptyState").style.display =
       contacts.length === 0 ? "block" : "none";
