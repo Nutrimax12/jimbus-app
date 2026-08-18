@@ -475,10 +475,16 @@ $("followupCount").textContent =
   });
 window.showPendingFollowups = false;
 
-$("followupCount").parentElement.onclick = () => {
-  window.showPendingFollowups = !window.showPendingFollowups;
-  render();
-};
+const followupCard = $("followupCount").closest(".stat-card");
+
+if (followupCard) {
+  followupCard.style.cursor = "pointer";
+
+  followupCard.onclick = () => {
+    window.showPendingFollowups = !window.showPendingFollowups;
+    render();
+  };
+}
 
   await loadContacts();
 })();
