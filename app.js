@@ -495,5 +495,30 @@ if (followupCard) {
   };
 }
 
+  const clientCard = $("clientCount").closest(".stat-card");
+const prospectCard = $("prospectCount").closest(".stat-card");
+
+if (clientCard) {
+  clientCard.style.cursor = "pointer";
+
+  clientCard.onclick = () => {
+    $("typeFilter").value =
+      $("typeFilter").value === "Cliente" ? "" : "Cliente";
+
+    render();
+  };
+}
+
+if (prospectCard) {
+  prospectCard.style.cursor = "pointer";
+
+  prospectCard.onclick = () => {
+    $("typeFilter").value =
+      $("typeFilter").value === "Prospecto" ? "" : "Prospecto";
+
+    render();
+  };
+}
+
   await loadContacts();
 })();
