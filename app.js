@@ -351,6 +351,7 @@ $("followupCount").textContent =
 
   async function saveContact(e) {
     e.preventDefault();
+    const id = $("contactId").value;
 
     const currentContact = id
   ? contacts.find(c => c.id === String(id))
