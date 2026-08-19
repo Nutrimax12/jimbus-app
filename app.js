@@ -502,8 +502,15 @@ if (clientCard) {
   clientCard.style.cursor = "pointer";
 
   clientCard.onclick = () => {
-    $("typeFilter").value =
-      $("typeFilter").value === "Cliente" ? "" : "Cliente";
+    const isActive = $("typeFilter").value === "Cliente";
+
+    $("typeFilter").value = isActive ? "" : "Cliente";
+
+    clientCard.style.outline = isActive ? "none" : "2px solid #111827";
+    clientCard.style.background = isActive ? "" : "#f3f4f6";
+
+    prospectCard.style.outline = "none";
+    prospectCard.style.background = "";
 
     render();
   };
@@ -513,8 +520,15 @@ if (prospectCard) {
   prospectCard.style.cursor = "pointer";
 
   prospectCard.onclick = () => {
-    $("typeFilter").value =
-      $("typeFilter").value === "Prospecto" ? "" : "Prospecto";
+    const isActive = $("typeFilter").value === "Prospecto";
+
+    $("typeFilter").value = isActive ? "" : "Prospecto";
+
+    prospectCard.style.outline = isActive ? "none" : "2px solid #111827";
+    prospectCard.style.background = isActive ? "" : "#f3f4f6";
+
+    clientCard.style.outline = "none";
+    clientCard.style.background = "";
 
     render();
   };
