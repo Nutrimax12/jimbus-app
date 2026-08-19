@@ -422,10 +422,25 @@ $("followupCount").textContent =
 
     await loadContacts();
   }; 
-  window.completeFollowup = async function(id) {
+ window.completeFollowup = async function(id) {
+  const contact = contacts.find(c => c.id === String(id));
+
+  if (!contact) return;
+
+  const today = new Date().toLocaleDateString("es-CO");
+
+  const oldNote = contact.notes ? contact.notes.trim() : "";
+
+  const completedNote = oldNote
+    ? `✓ ${today} — ${oldNote}`
+    : `✓ ${today} — Seguimiento realizado`;
+
   const { error } = await supabase
     .from("jimbus_contactos")
-    .update({ proximo_seguimiento: null })
+    .update({
+      proximo_seguimiento: null,
+      notas: completedNote
+    })
     .eq("id", id)
     .eq("usuario_id", currentUser.id);
 
