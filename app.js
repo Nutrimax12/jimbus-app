@@ -283,12 +283,14 @@ $("followupCount").textContent =
             ? `<p><strong>Próximo seguimiento:</strong> ${escapeHtml(c.nextFollowup)}</p>`
             : ""
         }
+        ${c.notes ? `
+  <p>
+    <strong>Nota de seguimiento:</strong>
+    ${escapeHtml(c.notes)}
+  </p>
+` : ""}
 
-        ${
-          c.notes
-            ? `<p><strong>Nota:</strong> ${escapeHtml(c.notes)}</p>`
-            : ""
-        }
+       
 
         <div class="contact-actions">
           <button
