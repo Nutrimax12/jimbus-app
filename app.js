@@ -304,6 +304,13 @@ $("followupCount").textContent =
             onclick="whatsappContact('${c.id}')">
             💬 WhatsApp
           </button>
+          ${c.nextFollowup ? `
+  <button
+    class="small-button"
+    onclick="completeFollowup('${c.id}')">
+    ✓ Realizado
+  </button>
+` : ""}
 
           <button
             class="small-button"
@@ -414,7 +421,21 @@ $("followupCount").textContent =
     }
 
     await loadContacts();
-  };
+  }; 
+  window.completeFollowup = async function(id) {
+  const { error } = await supabase
+    .from("jimbus_contactos")
+    .update({ proximo_seguimiento: null })
+    .eq("id", id)
+    .eq("usuario_id", currentUser.id);
+
+  if (error) {
+    alert("No se pudo marcar el seguimiento como realizado: " + error.message);
+    return;
+  }
+
+  await loadContacts();
+};
 
   window.callContact = function(id) {
     const contact = contacts.find(c => c.id === String(id));
