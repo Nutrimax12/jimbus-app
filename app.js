@@ -352,7 +352,21 @@ $("followupCount").textContent =
   async function saveContact(e) {
     e.preventDefault();
 
-    const id = $("contactId").value;
+    const currentContact = id
+  ? contacts.find(c => c.id === String(id))
+  : null;
+
+const newNote = $("notes").value.trim();
+
+let finalNotes = newNote || null;
+
+if (currentContact && currentContact.notes) {
+  if (newNote && newNote !== currentContact.notes) {
+    finalNotes = currentContact.notes + "\n" + newNote;
+  } else {
+    finalNotes = currentContact.notes;
+  }
+}
 
     const payload = {
       negocio: $("businessName").value.trim(),
@@ -362,7 +376,7 @@ $("followupCount").textContent =
       barrio: $("zone").value.trim() || null,
       tipo: $("contactType").value,
       proximo_seguimiento: $("nextFollowup").value || null,
-      notas: $("notes").value.trim() || null
+      notas: finalNotes
     };
 
     let error;
