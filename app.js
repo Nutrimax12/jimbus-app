@@ -338,7 +338,7 @@ $("followupCount").textContent =
     $("zone").value = contact?.zone || "";
     $("contactType").value = contact?.contactType || "Cliente";
     $("nextFollowup").value = contact?.nextFollowup || "";
-    $("notes").value = contact?.notes || "";
+    $("notes").value = "";
 
     $("contactModal").classList.remove("hidden");
   }
