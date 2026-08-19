@@ -507,7 +507,7 @@ if (clientCard) {
     $("typeFilter").value = isActive ? "" : "Cliente";
 
     clientCard.style.outline = isActive ? "none" : "2px solid #111827";
-    clientCard.style.background = isActive ? "" : "#f3f4f6";
+    clientCard.style.background = isActive ? "" : "#e5e7eb";
 
     prospectCard.style.outline = "none";
     prospectCard.style.background = "";
@@ -525,7 +525,7 @@ if (prospectCard) {
     $("typeFilter").value = isActive ? "" : "Prospecto";
 
     prospectCard.style.outline = isActive ? "none" : "2px solid #111827";
-    prospectCard.style.background = isActive ? "" : "#f3f4f6";
+   prospectCard.style.background = isActive ? "" : "#e5e7eb";
 
     clientCard.style.outline = "none";
     clientCard.style.background = "";
