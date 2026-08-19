@@ -281,7 +281,12 @@ $("followupCount").textContent =
             ? `<p><strong>Próximo seguimiento:</strong> ${escapeHtml(c.nextFollowup)}</p>`
             : ""
         }
-       
+       ${c.notes ? `
+<p>
+  <strong>Nota de seguimiento:</strong><br>
+  ${escapeHtml(c.notes).replace(/\n/g, "<br>")}
+</p>
+` : ""}
 
        
 
@@ -357,13 +362,14 @@ const newNote = $("notes").value.trim();
 let finalNotes = newNote || null;
 
 if (currentContact && currentContact.notes) {
-  if (newNote && newNote !== currentContact.notes) {
-   finalNotes = newNote + "\n" + currentContact.notes;
+  const oldNotes = currentContact.notes.trim();
+
+  if (newNote) {
+    finalNotes = newNote + "\n" + oldNotes;
   } else {
-    finalNotes = currentContact.notes;
+    finalNotes = oldNotes;
   }
 }
-
     const payload = {
       negocio: $("businessName").value.trim(),
       encargado: $("contactName").value.trim(),
