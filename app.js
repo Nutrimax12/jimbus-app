@@ -224,8 +224,8 @@ const filtered = contacts.filter(c => {
     !type || c.contactType === type;
 
   const matchesFollowup =
-    !window.showPendingFollowups ||
-    (c.nextFollowup && c.nextFollowup <= today);
+  !window.showPendingFollowups ||
+  c.nextFollowup;
 
   return matchesSearch && matchesType && matchesFollowup;
 });
@@ -238,9 +238,7 @@ const filtered = contacts.filter(c => {
       contacts.filter(c => c.contactType === "Prospecto").length;
 
 $("followupCount").textContent =
-  contacts.filter(c =>
-    c.nextFollowup && c.nextFollowup <= today
-  ).length;
+  contacts.filter(c => c.nextFollowup).length;
 
     $("emptyState").style.display =
       contacts.length === 0 ? "block" : "none";
