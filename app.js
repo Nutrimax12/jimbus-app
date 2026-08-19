@@ -281,12 +281,7 @@ $("followupCount").textContent =
             ? `<p><strong>Próximo seguimiento:</strong> ${escapeHtml(c.nextFollowup)}</p>`
             : ""
         }
-        ${c.notes ? `
-  <p>
-    <strong>Nota de seguimiento:</strong>
-    ${escapeHtml(c.notes)}
-  </p>
-` : ""}
+       
 
        
 
@@ -363,7 +358,7 @@ let finalNotes = newNote || null;
 
 if (currentContact && currentContact.notes) {
   if (newNote && newNote !== currentContact.notes) {
-    finalNotes = currentContact.notes + "\n" + newNote;
+   finalNotes = newNote + "\n" + currentContact.notes;
   } else {
     finalNotes = currentContact.notes;
   }
