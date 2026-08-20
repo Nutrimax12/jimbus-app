@@ -357,7 +357,9 @@ $("followupCount").textContent =
   ? contacts.find(c => c.id === String(id))
   : null;
 
-const newNote = $("notes").value.trim();
+const noteText = $("notes").value.trim();
+const today = new Date().toLocaleDateString("es-CO");
+const newNote = noteText ? `${today} — ${noteText}` : "";
 
 let finalNotes = newNote || null;
 
