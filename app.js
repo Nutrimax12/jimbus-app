@@ -295,6 +295,7 @@ const followupStatus =
       </p>`
     : ""
 }
+${c.notes ? `
 <p>
   <strong>Nota de seguimiento:</strong><br>
   ${escapeHtml(c.notes).replace(/\n/g, "<br>")}
