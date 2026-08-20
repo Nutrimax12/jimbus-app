@@ -248,6 +248,16 @@ $("followupCount").textContent =
   }
 
   function contactCard(c) {
+    const today = new Date().toISOString().split("T")[0];
+
+const followupStatus =
+  !c.nextFollowup
+    ? ""
+    : c.nextFollowup < today
+      ? "VENCIDO"
+      : c.nextFollowup === today
+        ? "HOY"
+        : "";
     return `
       <article class="contact-card">
         <span class="type-badge">${escapeHtml(c.contactType)}</span>
@@ -276,12 +286,15 @@ $("followupCount").textContent =
             : ""
         }
 
-        ${
-          c.nextFollowup
-            ? `<p><strong>Próximo seguimiento:</strong> ${escapeHtml(c.nextFollowup)}</p>`
-            : ""
-        }
-       ${c.notes ? `
+       ${
+  c.nextFollowup
+    ? `<p>
+        <strong>Próximo seguimiento:</strong>
+        ${escapeHtml(c.nextFollowup)}
+        ${followupStatus ? `<strong> — ${followupStatus}</strong>` : ""}
+      </p>`
+    : ""
+}
 <p>
   <strong>Nota de seguimiento:</strong><br>
   ${escapeHtml(c.notes).replace(/\n/g, "<br>")}
