@@ -286,15 +286,15 @@ const followupStatus =
             : ""
         }
 
-       ${
-  c.nextFollowup
-    ? `<p>
-        <strong>Próximo seguimiento:</strong>
-        ${escapeHtml(c.nextFollowup)}
-        ${followupStatus ? `<strong> — ${followupStatus}</strong>` : ""}
-      </p>`
-    : ""
-}
+         
+${c.nextFollowup ? `
+<p>
+  <strong>Próximo seguimiento:</strong>
+  ${escapeHtml(c.nextFollowup)}
+  ${followupStatus ? `<strong> — ${followupStatus}</strong>` : ""}
+</p>
+` : ""}
+
 ${c.notes ? `
 <p>
   <strong>Nota de seguimiento:</strong><br>
