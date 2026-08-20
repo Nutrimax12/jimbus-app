@@ -247,9 +247,9 @@ $("followupCount").textContent =
       filtered.map(contactCard).join("");
   }
 
-  function contactCard(c) {
-    const today = new Date().toISOString().split("T")[0];
-
+ const today = new Date().toLocaleDateString("en-CA", {
+  timeZone: "America/Bogota"
+});
 const followupStatus =
   !c.nextFollowup
     ? ""
