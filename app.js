@@ -247,6 +247,8 @@ $("followupCount").textContent =
       filtered.map(contactCard).join("");
   }
 
+  function contactCard(c) {
+
  const today = new Date().toLocaleDateString("en-CA", {
   timeZone: "America/Bogota"
 });
