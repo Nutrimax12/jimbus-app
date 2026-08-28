@@ -355,3 +355,32 @@ label {
     font-size: 12px;
   }
 }
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.status-nuevo {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-contactado {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-interesado {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.status-cliente {
+  background: #dcfce7;
+  color: #15803d;
+}
