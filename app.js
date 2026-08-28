@@ -226,7 +226,7 @@ const filtered = contacts.filter(c => {
 
   const matchesFollowup =
   !window.showPendingFollowups ||
-  c.nextFollowup;
+ c.nextFollowup === today;
 
   return matchesSearch && matchesType && matchesFollowup;
 });
@@ -617,6 +617,22 @@ if (prospectCard) {
 
     clientCard.style.outline = "none";
     clientCard.style.background = "";
+
+    render();
+  };
+}
+
+  const followupCard = $("followupCard");
+
+if (followupCard) {
+  followupCard.onclick = () => {
+    window.showPendingFollowups = !window.showPendingFollowups;
+
+    followupCard.style.outline =
+      window.showPendingFollowups ? "2px solid #111827" : "none";
+
+    followupCard.style.background =
+      window.showPendingFollowups ? "#fef3c7" : "";
 
     render();
   };
