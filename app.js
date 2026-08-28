@@ -622,7 +622,7 @@ if (prospectCard) {
   };
 }
 
-  const followupCard = $("followupCard");
+
 
 if (followupCard) {
   followupCard.onclick = () => {
