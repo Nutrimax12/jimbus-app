@@ -222,11 +222,9 @@ const filtered = contacts.filter(c => {
     );
 
   const matchesType =
-    !type || c.contactType === type;
-
  const matchesFollowup =
-  type ||
   !window.showPendingFollowups ||
+  c.nextFollowup === today;
   c.nextFollowup;
 
   return matchesSearch && matchesType && matchesFollowup;
@@ -557,49 +555,47 @@ if (currentContact && currentContact.notes) {
     location.reload();
   };
 
-  $("contactModal").addEventListener("click", e => {
-    if (e.target === $("contactModal")) {
-      closeModal();
-    }
-  });
-window.showPendingFollowups = false;
+ window.showPendingFollowups = false;
 
 const followupCard = $("followupCount").closest(".stat-card");
+const clientCard = $("clientCount").closest(".stat-card");
+const prospectCard = $("prospectCount").closest(".stat-card");
+
+function clearStatSelection() {
+  [clientCard, prospectCard, followupCard].forEach(card => {
+    if (!card) return;
+    card.style.outline = "none";
+    card.style.background = "";
+  });
+}
 
 if (followupCard) {
   followupCard.style.cursor = "pointer";
 
   followupCard.onclick = () => {
-    window.showPendingFollowups = !window.showPendingFollowups;
+    $("typeFilter").value = "";
+    window.showPendingFollowups = true;
 
-    if (window.showPendingFollowups) {
-      followupCard.style.outline = "2px solid #111827";
-      followupCard.style.background = "#f3f4f6";
-    } else {
-      followupCard.style.outline = "none";
-      followupCard.style.background = "";
-    }
+    clearStatSelection();
+
+    followupCard.style.outline = "2px solid #111827";
+    followupCard.style.background = "#f3f4f6";
 
     render();
   };
 }
 
-  const clientCard = $("clientCount").closest(".stat-card");
-const prospectCard = $("prospectCount").closest(".stat-card");
-
 if (clientCard) {
   clientCard.style.cursor = "pointer";
 
   clientCard.onclick = () => {
-    const isActive = $("typeFilter").value === "Cliente";
+    $("typeFilter").value = "Cliente";
+    window.showPendingFollowups = false;
 
-    $("typeFilter").value = isActive ? "" : "Cliente";
+    clearStatSelection();
 
-    clientCard.style.outline = isActive ? "none" : "2px solid #111827";
-    clientCard.style.background = isActive ? "" : "#e5e7eb";
-
-    prospectCard.style.outline = "none";
-    prospectCard.style.background = "";
+    clientCard.style.outline = "2px solid #111827";
+    clientCard.style.background = "#e5e7eb";
 
     render();
   };
@@ -609,19 +605,19 @@ if (prospectCard) {
   prospectCard.style.cursor = "pointer";
 
   prospectCard.onclick = () => {
-    const isActive = $("typeFilter").value === "Prospecto";
+    $("typeFilter").value = "Prospecto";
+    window.showPendingFollowups = false;
 
-    $("typeFilter").value = isActive ? "" : "Prospecto";
+    clearStatSelection();
 
-    prospectCard.style.outline = isActive ? "none" : "2px solid #111827";
-   prospectCard.style.background = isActive ? "" : "#e5e7eb";
-
-    clientCard.style.outline = "none";
-    clientCard.style.background = "";
+    prospectCard.style.outline = "2px solid #111827";
+    prospectCard.style.background = "#e5e7eb";
 
     render();
   };
 }
+
+    
 
   await loadContacts();
 })();
