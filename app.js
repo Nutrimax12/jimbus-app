@@ -397,7 +397,8 @@ if (currentContact && currentContact.notes) {
       barrio: $("zone").value.trim() || null,
       tipo: $("contactType").value,
       proximo_seguimiento: $("nextFollowup").value || null,
-      notas: finalNotes
+      notas: finalNotes,
+      estado_comercial: $("#commercialStatus").value
     };
 
     let error;
