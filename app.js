@@ -398,7 +398,7 @@ if (currentContact && currentContact.notes) {
       tipo: $("contactType").value,
       proximo_seguimiento: $("nextFollowup").value || null,
       notas: finalNotes,
-      estado_comercial: $("#commercialStatus").value
+     estado_comercial: $("commercialStatus").value
     };
 
     let error;
