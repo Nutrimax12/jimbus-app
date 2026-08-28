@@ -226,7 +226,7 @@ const filtered = contacts.filter(c => {
 
   const matchesFollowup =
   !window.showPendingFollowups ||
- c.nextFollowup === today;
+  c.nextFollowup;
 
   return matchesSearch && matchesType && matchesFollowup;
 });
@@ -622,10 +622,5 @@ if (prospectCard) {
   };
 }
 
-await loadContacts();
+  await loadContacts();
 })();
-
-
-
-
-
