@@ -32,7 +32,8 @@
       zone: row.barrio || "",
       contactType: row.tipo || "Cliente",
       nextFollowup: row.proximo_seguimiento || "",
-      notes: row.notas || ""
+      notes: row.notas || "",
+      commercialStatus: row.estado_comercial || "Nuevo"
     };
   }
 
