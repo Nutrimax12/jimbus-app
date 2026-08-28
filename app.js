@@ -239,7 +239,7 @@ const filtered = contacts.filter(c => {
       contacts.filter(c => c.contactType === "Prospecto").length;
 
 $("followupCount").textContent =
-  contacts.filter(c => c.nextFollowup).length;
+  contacts.filter(c => c.nextFollowup === today).length;
 
     $("emptyState").style.display =
       contacts.length === 0 ? "block" : "none";
