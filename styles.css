@@ -384,3 +384,22 @@ label {
   background: #dcfce7;
   color: #15803d;
 }
+.contact-card {
+  border-left: 6px solid transparent;
+}
+
+.card-nuevo {
+  border-left-color: #9ca3af;
+}
+
+.card-contactado {
+  border-left-color: #2563eb;
+}
+
+.card-interesado {
+  border-left-color: #f97316;
+}
+
+.card-cliente {
+  border-left-color: #16a34a;
+}
