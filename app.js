@@ -262,7 +262,7 @@ const followupStatus =
         ? "HOY"
         : "";
     return `
-      <article class="contact-card">
+     <article class="contact-card card-${(c.commercialStatus || "Nuevo").toLowerCase()}">
         <span class="type-badge">${escapeHtml(c.contactType)}</span>
 
         <h3>${escapeHtml(c.businessName)}</h3>
