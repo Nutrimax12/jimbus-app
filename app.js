@@ -291,9 +291,20 @@ const followupStatus =
 
         ${
   c.commercialStatus
-    ? `<p><strong>Estado comercial:</strong> ${escapeHtml(c.commercialStatus)}</p>`
+    ? `<p>
+        <strong>Estado comercial:</strong>
+        <span class="status-badge status-${c.commercialStatus.toLowerCase()}">
+          ${
+            c.commercialStatus === "Nuevo" ? "🆕" :
+            c.commercialStatus === "Contactado" ? "📞" :
+            c.commercialStatus === "Interesado" ? "🔥" :
+            c.commercialStatus === "Cliente" ? "✅" : ""
+          }
+          ${escapeHtml(c.commercialStatus)}
+        </span>
+      </p>`
     : ""
-} 
+}
 ${c.nextFollowup ? `
 <p>
   <strong>Próximo seguimiento:</strong>
