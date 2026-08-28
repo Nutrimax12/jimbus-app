@@ -354,6 +354,7 @@ ${c.notes ? `
     $("city").value = contact?.city || "";
     $("zone").value = contact?.zone || "";
     $("contactType").value = contact?.contactType || "Cliente";
+    $("commercialStatus").value = contact?.commercialStatus || "Nuevo";
     $("nextFollowup").value = contact?.nextFollowup || "";
     $("notes").value = "";
 
