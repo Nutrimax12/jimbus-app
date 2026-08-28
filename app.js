@@ -224,7 +224,8 @@ const filtered = contacts.filter(c => {
   const matchesType =
     !type || c.contactType === type;
 
-  const matchesFollowup =
+ const matchesFollowup =
+  type ||
   !window.showPendingFollowups ||
   c.nextFollowup;
 
