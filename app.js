@@ -624,19 +624,18 @@ if (prospectCard) {
 
 
 
-if (followupCard) {
-  followupCard.onclick = () => {
+const followupTodayCard = $("followupCard");
+
+if (followupTodayCard) {
+  followupTodayCard.onclick = () => {
     window.showPendingFollowups = !window.showPendingFollowups;
 
-    followupCard.style.outline =
+    followupTodayCard.style.outline =
       window.showPendingFollowups ? "2px solid #111827" : "none";
 
-    followupCard.style.background =
+    followupTodayCard.style.background =
       window.showPendingFollowups ? "#fef3c7" : "";
 
     render();
   };
 }
-
-  await loadContacts();
-})();
