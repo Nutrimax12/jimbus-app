@@ -289,7 +289,11 @@ const followupStatus =
             : ""
         }
 
-         
+        ${
+  c.commercialStatus
+    ? `<p><strong>Estado comercial:</strong> ${escapeHtml(c.commercialStatus)}</p>`
+    : ""
+} 
 ${c.nextFollowup ? `
 <p>
   <strong>Próximo seguimiento:</strong>
