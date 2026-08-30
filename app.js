@@ -195,9 +195,10 @@
 
   async function loadContacts() {
     const { data, error } = await supabase
-      .from("jimbus_contactos")
-      .select("*")
-      .order("created_at", { ascending: false });
+  .from("jimbus_contactos")
+  .select("*")
+  .eq("usuario_id", currentUser.id)
+  .order("created_at", { ascending: false });
 
     if (error) {
       console.error(error);
