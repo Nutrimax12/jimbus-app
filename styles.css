@@ -404,9 +404,11 @@ label {
   border-left-color: #16a34a;
 }
 .followup-history-item {
-  padding: 8px 0;
-  border-bottom: 1px solid #e5e7eb;
-  line-height: 1.45;
+  display: block;
+  padding: 9px 4px;
+  margin: 0;
+  border-bottom: 1px solid #cbd5e1;
+  line-height: 1.4;
 }
 
 .followup-history-item:last-child {
@@ -415,4 +417,5 @@ label {
 
 .followup-history-item:first-child {
   font-weight: 600;
+  background: #f8fafc;
 }
