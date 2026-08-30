@@ -395,7 +395,7 @@ ${c.notes ? `
   ? contacts.find(c => c.id === String(id))
   : null;
 
-const noteText = $("notes").value.trim();
+const noteText = $("notes").value.trim().replace(/\s*\n+\s*/g, " ");
 const today = new Date().toLocaleDateString("es-CO");
 const newNote = noteText ? `${today} — ${noteText}` : "";
 
