@@ -433,6 +433,7 @@ if (currentContact && currentContact.notes) {
       negocio: $("businessName").value.trim(),
       encargado: $("contactName").value.trim(),
       telefono: $("phone").value.trim(),
+      direccion: $("address").value.trim() || null,
       ciudad: $("city").value.trim() || null,
       barrio: $("zone").value.trim() || null,
       tipo: $("contactType").value,
