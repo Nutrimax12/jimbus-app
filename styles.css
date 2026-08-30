@@ -390,19 +390,23 @@ label {
 
 .card-nuevo {
   border-left-color: #9ca3af;
+  background: #f8fafc;
 }
-
 .card-contactado {
   border-left-color: #2563eb;
+  background: #eff6ff;
 }
-
 .card-interesado {
   border-left-color: #f97316;
+  background: #fff7ed;
 }
 
 .card-cliente {
   border-left-color: #16a34a;
+  background: #f0fdf4;
 }
+ 
+
 .followup-history-item {
   display: block;
   padding: 9px 4px;
