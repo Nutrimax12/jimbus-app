@@ -28,6 +28,7 @@
       businessName: row.negocio || "",
       contactName: row.encargado || "",
       phone: row.telefono || "",
+      address: row.direccion || "",
       city: row.ciudad || "",
       zone: row.barrio || "",
       contactType: row.tipo || "Cliente",
