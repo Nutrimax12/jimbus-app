@@ -278,6 +278,11 @@ const followupStatus =
           <strong>Teléfono:</strong>
           ${escapeHtml(c.phone)}
         </p>
+        ${
+  c.address
+    ? `<p><strong>Dirección:</strong> ${escapeHtml(c.address)}</p>`
+    : ""
+}
 
         ${
           c.city
