@@ -126,8 +126,8 @@ button, input, select, textarea {
 }
 
 .stat-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: #eef4fb;
+ border: 1px solid #cbd9e8;
   border-radius: 14px;
   padding: 20px;
 }
@@ -136,11 +136,11 @@ button, input, select, textarea {
   display: block;
   font-size: 30px;
   font-weight: 800;
-  color: #111827;
+ color: #163a63;
 }
 
 .stat-card p {
-  color: #6b7280;
+  color: #52677d;
   margin-top: 5px;
 }
 
