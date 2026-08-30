@@ -423,3 +423,98 @@ label {
   font-weight: 600;
   background: #f8fafc;
 }
+/* =========================================
+   IDENTIDAD CORPORATIVA JIMBUS
+   SOLO CAMBIOS VISUALES
+   ========================================= */
+
+/* Fondo general */
+body {
+  background: #f4f7fb;
+  color: #16325c;
+}
+
+/* Cabecera */
+.topbar {
+  background: #ffffff;
+  border-bottom-color: #d7e3f4;
+}
+
+/* Logo J */
+.logo {
+  background: #0b4da2;
+  color: #ffffff;
+}
+
+/* Título principal */
+.dashboard-head h2 {
+  color: #0b3b75;
+}
+
+/* Textos secundarios */
+.dashboard-head p,
+.brand p {
+  color: #60738f;
+}
+
+/* Botón principal */
+.primary-action,
+.primary-button {
+  background: #0b4da2;
+  color: #ffffff;
+}
+
+/* Tarjetas estadísticas */
+.stat-card {
+  background: #edf4fd;
+  border-color: #c8daf2;
+}
+
+.stat-card span {
+  color: #0b3b75;
+}
+
+.stat-card p {
+  color: #49698f;
+}
+
+/* Campos de búsqueda y filtros */
+input,
+select,
+textarea {
+  border-color: #c8d6e8;
+}
+
+/* Tarjetas de contactos */
+.contact-card {
+  border-color: #d6e1ef;
+}
+
+/* NUEVO */
+.card-nuevo {
+  border-left-color: #8aa4c5;
+  background: #f8fbff;
+}
+
+/* CONTACTADO */
+.card-contactado {
+  border-left-color: #2563eb;
+  background: #f3f7ff;
+}
+
+/* INTERESADO */
+.card-interesado {
+  border-left-color: #f59e0b;
+  background: #fffaf0;
+}
+
+/* CLIENTE */
+.card-cliente {
+  border-left-color: #16a34a;
+  background: #f4fbf6;
+}
+
+/* Separadores del historial */
+.followup-history-item {
+  border-bottom-color: #d8e3f0;
+}
