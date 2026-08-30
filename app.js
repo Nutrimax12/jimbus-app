@@ -221,7 +221,7 @@ const filtered = contacts.filter(c => {
       String(v || "").toLowerCase().includes(search)
     );
 
-  const matchesType =
+const matchesType =
   !type || c.contactType === type;
 
 const matchesFollowup =
