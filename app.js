@@ -173,9 +173,12 @@
       $("authMessage").textContent = "Creando cuenta...";
 
       const { data, error } = await supabase.auth.signUp({
-        email,
-        password
-      });
+  email,
+  password,
+  options: {
+    emailRedirectTo: "https://nutrimax12.github.io/jimbus-app/"
+  }
+});
 
       if (error) {
         $("authMessage").textContent =
