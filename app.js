@@ -315,14 +315,33 @@ ${c.nextFollowup ? `
 ` : ""}
 
 ${c.notes ? `
-<p>
-  <strong>Historial de seguimiento:</strong><br>
+<div class="followup-history">
+  <strong>Historial de seguimiento:</strong>
+
   ${escapeHtml(c.notes)
     .split("\n")
     .filter(line => line.trim())
+    .slice(0, 3)
     .map(line => `<div class="followup-history-item">${line}</div>`)
     .join("")}
-</p>
+
+  ${
+    c.notes.split("\n").filter(line => line.trim()).length > 3
+      ? `<details class="followup-more">
+          <summary>
+            Ver historial completo (${c.notes.split("\n").filter(line => line.trim()).length})
+          </summary>
+
+          ${escapeHtml(c.notes)
+            .split("\n")
+            .filter(line => line.trim())
+            .slice(3)
+            .map(line => `<div class="followup-history-item">${line}</div>`)
+            .join("")}
+        </details>`
+      : ""
+  }
+</div>
 ` : ""}
 
        
