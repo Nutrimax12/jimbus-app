@@ -316,8 +316,12 @@ ${c.nextFollowup ? `
 
 ${c.notes ? `
 <p>
-  <strong>Nota de seguimiento:</strong><br>
-  ${escapeHtml(c.notes).replace(/\n/g, "<br>")}
+  <strong>Historial de seguimiento:</strong><br>
+  ${escapeHtml(c.notes)
+    .split("\n")
+    .filter(line => line.trim())
+    .map(line => `<div class="followup-history-item">${line}</div>`)
+    .join("")}
 </p>
 ` : ""}
 
