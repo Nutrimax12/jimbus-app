@@ -222,10 +222,12 @@ const filtered = contacts.filter(c => {
     );
 
   const matchesType =
- const matchesFollowup =
+  !type || c.contactType === type;
+
+const matchesFollowup =
   !window.showPendingFollowups ||
   c.nextFollowup === today;
-  c.nextFollowup;
+
 
   return matchesSearch && matchesType && matchesFollowup;
 });
