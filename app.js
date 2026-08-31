@@ -611,7 +611,7 @@ if (currentContact && currentContact.notes) {
       "_blank"
     );
   };
-
+(async () => {
   const {
   data: { session }
 } = await supabase.auth.getSession();
