@@ -245,7 +245,8 @@
     alert("Cuenta creada. JIMBUS debe activar tu suscripción.");
     location.reload();
   }
-};
+
+      }
   async function loadContacts() {
     const { data, error } = await supabase
   .from("jimbus_contactos")
@@ -611,7 +612,7 @@ if (currentContact && currentContact.notes) {
       "_blank"
     );
   };
-(async () => {
+
   const {
   data: { session }
 } = await supabase.auth.getSession();
