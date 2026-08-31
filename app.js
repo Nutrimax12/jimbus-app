@@ -242,6 +242,7 @@
       "Cuenta creada. Revisa tu correo para confirmar el registro.";
   } else {
     await supabase.auth.signOut();
+    }
     alert("Cuenta creada. JIMBUS debe activar tu suscripción.");
     location.reload();
   };
@@ -603,7 +604,7 @@ if (currentContact && currentContact.notes) {
 
     let phone =
       (contact.phone || "").replace(/\D/g, "");
-
+(async () => {
     if (phone.length === 10) {
       phone = "57" + phone;
     }
