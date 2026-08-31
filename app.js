@@ -244,9 +244,9 @@
     await supabase.auth.signOut();
     alert("Cuenta creada. JIMBUS debe activar tu suscripción.");
     location.reload();
-  }
+  };
 
-      };
+      
 }
   async function loadContacts() {
     const { data, error } = await supabase
