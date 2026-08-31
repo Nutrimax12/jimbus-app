@@ -174,9 +174,10 @@ if (perfilError || !perfil) {
 }
 
 if (perfil.estado !== "activo") {
+  await supabase.auth.signOut();
+  showAuthScreen();
   $("#authMessage").textContent =
     "Tu cuenta está bloqueada. Contacta a JIMBUS.";
-  await supabase.auth.signOut();
   return;
 }
 if (
