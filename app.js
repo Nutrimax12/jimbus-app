@@ -174,12 +174,11 @@ if (perfilError || !perfil) {
 }
 
 if (perfil.estado !== "activo") {
-  await supabase.auth.signOut();
   $("#authMessage").textContent =
     "Tu cuenta está bloqueada. Contacta a JIMBUS.";
+  await supabase.auth.signOut();
   return;
 }
-
 if (
   perfil.fecha_vencimiento &&
   new Date(perfil.fecha_vencimiento + "T23:59:59") < new Date()
