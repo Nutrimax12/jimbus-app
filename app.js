@@ -192,41 +192,60 @@
   location.reload();
 });
     $("createAccountBtn").onclick = async () => {
-      const email = $("loginEmail").value.trim();
-      const password = $("loginPassword").value;
+  const email = $("loginEmail").value.trim();
+  const password = $("loginPassword").value;
 
-      if (!email || password.length < 6) {
-        $("authMessage").textContent =
-          "Escribe un correo válido y una contraseña de mínimo 6 caracteres.";
-        return;
-      }
-
-      $("authMessage").textContent = "Creando cuenta...";
-
-      const { data, error } = await supabase.auth.signUp({
-  email,
-  password,
-  options: {
-    emailRedirectTo: "https://nutrimax12.github.io/jimbus-app/"
+  if (!email || password.length < 6) {
+    $("authMessage").textContent =
+      "Escribe un correo válido y una contraseña de mínimo 6 caracteres.";
+    return;
   }
-});
 
-      if (error) {
-        $("authMessage").textContent =
-          "No se pudo crear la cuenta: " + error.message;
-        return;
-      }
+  $("authMessage").textContent = "Creando cuenta...";
 
-      if (!data.session) {
-        $("authMessage").style.color = "#166534";
-        $("authMessage").textContent =
-          "Cuenta creada. Revisa tu correo para confirmar el registro.";
-      } else {
-        location.reload();
-      }
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: "https://nutrimax12.github.io/jimbus-app/"
+    }
+  });
+
+  if (error) {
+    $("authMessage").textContent =
+      "No se pudo crear la cuenta: " + error.message;
+    return;
+  }
+
+  if (data.user) {
+    const { error: perfilError } = await supabase
+      .from("jimbus_usuarios")
+      .insert({
+        usuario_id: data.user.id,
+        email: email,
+        plan: "mensual",
+        estado: "bloqueado",
+        fecha_vencimiento: null
+      });
+
+    if (perfilError) {
+      console.error("Error creando perfil JIMBUS:", perfilError);
+      $("authMessage").textContent =
+        "Cuenta creada, pero hubo un problema al registrar la suscripción.";
+      return;
     }
   }
 
+  if (!data.session) {
+    $("authMessage").style.color = "#166534";
+    $("authMessage").textContent =
+      "Cuenta creada. Revisa tu correo para confirmar el registro.";
+  } else {
+    await supabase.auth.signOut();
+    alert("Cuenta creada. JIMBUS debe activar tu suscripción.");
+    location.reload();
+  }
+};
   async function loadContacts() {
     const { data, error } = await supabase
   .from("jimbus_contactos")
