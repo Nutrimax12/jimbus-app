@@ -246,7 +246,8 @@
     location.reload();
   }
 
-      }
+      };
+}
   async function loadContacts() {
     const { data, error } = await supabase
   .from("jimbus_contactos")
