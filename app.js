@@ -599,15 +599,46 @@ if (currentContact && currentContact.notes) {
   };
 
   const {
-    data: { session }
-  } = await supabase.auth.getSession();
+  data: { session }
+} = await supabase.auth.getSession();
 
-  if (!session) {
-    showAuthScreen();
-    return;
-  }
+if (!session) {
+  showAuthScreen();
+  return;
+}
 
-  currentUser = session.user;
+const user = session.user;
+
+const { data: perfil, error: perfilError } = await supabase
+  .from("jimbus_usuarios")
+  .select("plan, estado, fecha_vencimiento")
+  .eq("usuario_id", user.id)
+  .single();
+
+if (perfilError || !perfil) {
+  await supabase.auth.signOut();
+  showAuthScreen();
+  return;
+}
+
+if (perfil.estado !== "activo") {
+  await supabase.auth.signOut();
+  showAuthScreen();
+  alert("Tu cuenta está bloqueada. Contacta a JIMBUS.");
+  return;
+}
+
+if (
+  perfil.fecha_vencimiento &&
+  new Date(perfil.fecha_vencimiento + "T23:59:59") < new Date()
+) {
+  await supabase.auth.signOut();
+  showAuthScreen();
+  alert("Tu suscripción ha vencido. Contacta a JIMBUS.");
+  return;
+}
+
+currentUser = user;
 
   $("newContactBtn").onclick = () => openModal();
   $("emptyNewBtn").onclick = () => openModal();
