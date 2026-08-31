@@ -146,18 +146,54 @@
       const email = $("loginEmail").value.trim();
       const password = $("loginPassword").value;
 
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
+const { data, error } = await supabase.auth.signInWithPassword({
+  email,
+  password
+});
 
-      if (error) {
-        $("authMessage").textContent =
-          "No se pudo iniciar sesión: " + error.message;
-        return;
-      }
+if (error) {
+  $("#authMessage").textContent =
+    "No se pudo iniciar sesión: " + error.message;
+  return;
+}
 
-      location.reload();
+// Verificar estado y plan del usuario en JIMBUS
+const user = data.user;
+
+const { data: perfil, error: perfilError } = await supabase
+  .from("jimbus_usuarios")
+  .select("plan, estado, fecha_vencimiento")
+  .eq("usuario_id", user.id)
+  .single();
+
+if (perfilError || !perfil) {
+  await supabase.auth.signOut();
+  $("#authMessage").textContent =
+    "Tu cuenta no está habilitada en JIMBUS.";
+  return;
+}
+
+if (perfil.estado !== "activo") {
+  await supabase.auth.signOut();
+  $("#authMessage").textContent =
+    "Tu cuenta está bloqueada. Contacta a JIMBUS.";
+  return;
+}
+
+if (
+  perfil.fecha_vencimiento &&
+  new Date(perfil.fecha_vencimiento + "T23:59:59") < new Date()
+) {
+  await supabase.auth.signOut();
+  $("#authMessage").textContent =
+    "Tu suscripción ha vencido. Contacta a JIMBUS.";
+  return;
+}
+
+location.reload();
+
+
+      
     });
 
     $("createAccountBtn").onclick = async () => {
