@@ -656,6 +656,9 @@ if (
 }
 
 currentUser = user;
+  if (perfil.rol === "admin") {
+  $("adminUsersBtn").style.display = "inline-block";
+}
 
   $("newContactBtn").onclick = () => openModal();
   $("emptyNewBtn").onclick = () => openModal();
