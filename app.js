@@ -676,13 +676,106 @@ currentUser = user;
     }
 
     $("adminUsersList").innerHTML = usuarios.map(usuario => `
-      <div style="border:1px solid #ddd; padding:14px; margin-bottom:10px; border-radius:10px;">
-        <strong>${escapeHtml(usuario.email || "")}</strong><br>
-        Plan: ${escapeHtml(usuario.plan || "")}<br>
-        Estado: ${escapeHtml(usuario.estado || "")}<br>
-        Vencimiento: ${escapeHtml(usuario.fecha_vencimiento || "Sin fecha")}
+  <div style="border:1px solid #ddd; padding:14px; margin-bottom:10px; border-radius:10px;">
+    <strong>${escapeHtml(usuario.email || "")}</strong><br>
+    Plan: ${escapeHtml(usuario.plan || "")}<br>
+    Estado: ${escapeHtml(usuario.estado || "")}<br>
+    Vencimiento: ${escapeHtml(usuario.fecha_vencimiento || "Sin fecha")}
+
+    ${usuario.rol !== "admin" ? `
+      <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="admin-activar" data-id="${usuario.usuario_id}">
+          Activar
+        </button>
+
+        <button class="admin-bloquear" data-id="${usuario.usuario_id}">
+          Bloquear
+        </button>
+
+        <button class="admin-renovar" data-id="${usuario.usuario_id}">
+          Renovar 30 días
+        </button>
       </div>
-    `).join("");
+    ` : `
+      <div style="margin-top:10px;">
+        <strong>Administrador</strong>
+      </div>
+    `}
+  </div>
+`).join("");
+
+$("adminUsersList").querySelectorAll(".admin-activar").forEach(btn => {
+  btn.onclick = async () => {
+    const { error } = await supabase
+      .from("jimbus_usuarios")
+      .update({ estado: "activo" })
+      .eq("usuario_id", btn.dataset.id);
+
+    if (error) {
+      alert("No se pudo activar el usuario.");
+      console.error(error);
+      return;
+    }
+
+    $("adminUsersBtn").click();
+  };
+});
+
+$("adminUsersList").querySelectorAll(".admin-bloquear").forEach(btn => {
+  btn.onclick = async () => {
+    const { error } = await supabase
+      .from("jimbus_usuarios")
+      .update({ estado: "bloqueado" })
+      .eq("usuario_id", btn.dataset.id);
+
+    if (error) {
+      alert("No se pudo bloquear el usuario.");
+      console.error(error);
+      return;
+    }
+
+    $("adminUsersBtn").click();
+  };
+});
+
+$("adminUsersList").querySelectorAll(".admin-renovar").forEach(btn => {
+  btn.onclick = async () => {
+    const usuario = usuarios.find(
+      u => u.usuario_id === btn.dataset.id
+    );
+
+    const hoy = new Date();
+
+    const vencimientoActual = usuario?.fecha_vencimiento
+      ? new Date(usuario.fecha_vencimiento + "T00:00:00")
+      : null;
+
+    const base =
+      vencimientoActual && vencimientoActual > hoy
+        ? vencimientoActual
+        : hoy;
+
+    base.setDate(base.getDate() + 30);
+
+    const nuevaFecha = base.toISOString().slice(0, 10);
+
+    const { error } = await supabase
+      .from("jimbus_usuarios")
+      .update({
+        estado: "activo",
+        fecha_vencimiento: nuevaFecha
+      })
+      .eq("usuario_id", btn.dataset.id);
+
+    if (error) {
+      alert("No se pudo renovar el usuario.");
+      console.error(error);
+      return;
+    }
+
+    $("adminUsersBtn").click();
+  };
+});
   };
 
   $("closeAdminPanelBtn").onclick = () => {
