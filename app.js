@@ -656,8 +656,38 @@ if (
 }
 
 currentUser = user;
-  if (perfil.rol === "admin") {
+ if (perfil.rol === "admin") {
   $("adminUsersBtn").style.display = "inline-block";
+
+  $("adminUsersBtn").onclick = async () => {
+    $("adminPanel").classList.remove("hidden");
+    $("adminUsersList").innerHTML = "Cargando usuarios...";
+
+    const { data: usuarios, error } = await supabase
+      .from("jimbus_usuarios")
+      .select("usuario_id, email, plan, estado, fecha_vencimiento, rol")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      $("adminUsersList").innerHTML =
+        "No se pudieron cargar los usuarios.";
+      console.error(error);
+      return;
+    }
+
+    $("adminUsersList").innerHTML = usuarios.map(usuario => `
+      <div style="border:1px solid #ddd; padding:14px; margin-bottom:10px; border-radius:10px;">
+        <strong>${escapeHtml(usuario.email || "")}</strong><br>
+        Plan: ${escapeHtml(usuario.plan || "")}<br>
+        Estado: ${escapeHtml(usuario.estado || "")}<br>
+        Vencimiento: ${escapeHtml(usuario.fecha_vencimiento || "Sin fecha")}
+      </div>
+    `).join("");
+  };
+
+  $("closeAdminPanelBtn").onclick = () => {
+    $("adminPanel").classList.add("hidden");
+  };
 }
 
   $("newContactBtn").onclick = () => openModal();
