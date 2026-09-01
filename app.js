@@ -236,20 +236,20 @@
     }
   }
 
-  if (!data.session) {
+    if (!data.session) {
     $("authMessage").style.color = "#166534";
     $("authMessage").textContent =
       "Cuenta creada. Revisa tu correo para confirmar el registro.";
   } else {
     await supabase.auth.signOut();
-    }
     alert("Cuenta creada. JIMBUS debe activar tu suscripción.");
     location.reload();
-  };
+  }
+};
 
-      
 }
-  async function loadContacts() {
+
+async function loadContacts() {
     const { data, error } = await supabase
   .from("jimbus_contactos")
   .select("*")
