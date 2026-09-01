@@ -161,7 +161,7 @@
 
   const { data: perfil, error: perfilError } = await supabase
     .from("jimbus_usuarios")
-    .select("plan, estado, fecha_vencimiento")
+    .select("plan, estado, fecha_vencimiento, rol")
     .eq("usuario_id", user.id)
     .single();
 
