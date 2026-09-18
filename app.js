@@ -297,7 +297,7 @@ function actualizarFiltroCiudades() {
   }
 }
   function render() {
-actualizarFiltroCiudades();
+
     
     const search = $("searchInput").value.trim().toLowerCase();
     const city = $("typeFilter").value;
