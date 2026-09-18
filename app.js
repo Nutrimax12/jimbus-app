@@ -485,7 +485,21 @@ ${c.notes ? `
     $("businessName").value = contact?.businessName || "";
     $("contactName").value = contact?.contactName || "";
     $("phone").value = contact?.phone || "";
-    $("city").value = contact?.city || "";
+const ciudadContacto = contact?.city || "";
+
+const ciudadesFijas = ["Bogotá", "Pereira", "Cartago"];
+
+if (ciudadContacto && !ciudadesFijas.includes(ciudadContacto)) {
+  const citySelect = $("city");
+  const option = document.createElement("option");
+  option.value = ciudadContacto;
+  option.textContent = ciudadContacto;
+  citySelect.insertBefore(option, citySelect.lastElementChild);
+}
+
+$("city").value = ciudadContacto;
+
+    
     $("zone").value = contact?.zone || "";
     $("contactType").value = contact?.contactType || "Cliente";
     $("commercialStatus").value = contact?.commercialStatus || "Nuevo";
