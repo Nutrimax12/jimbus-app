@@ -265,10 +265,42 @@ async function loadContacts() {
     contacts = (data || []).map(dbToContact);
     render();
   }
+function actualizarFiltroCiudades() {
+  const selector = $("typeFilter");
+  const valorActual = selector.value;
 
+  const ciudades = [];
+
+  contacts.forEach(c => {
+    const ciudad = (c.city || "").trim();
+    if (!ciudad) return;
+
+    const existe = ciudades.some(
+      x => x.toLowerCase() === ciudad.toLowerCase()
+    );
+
+    if (!existe) ciudades.push(ciudad);
+  });
+
+  ciudades.sort((a, b) => a.localeCompare(b, "es"));
+
+  selector.innerHTML =
+    `<option value="">Todas las ciudades</option>` +
+    ciudades
+      .map(ciudad =>
+        `<option value="${escapeHtml(ciudad)}">${escapeHtml(ciudad)}</option>`
+      )
+      .join("");
+
+  if (ciudades.some(c => c.toLowerCase() === valorActual.toLowerCase())) {
+    selector.value = valorActual;
+  }
+}
   function render() {
+actualizarFiltroCiudades();
+    
     const search = $("searchInput").value.trim().toLowerCase();
-    const type = $("typeFilter").value;
+    const city = $("typeFilter").value;
 
     const today = new Date().toISOString().split("T")[0];
 
@@ -279,15 +311,15 @@ const filtered = contacts.filter(c => {
       String(v || "").toLowerCase().includes(search)
     );
 
-const matchesType =
-  !type || c.contactType === type;
+const matchesCity =
+  !city || (c.city || "").trim().toLowerCase() === city.toLowerCase();
 
 const matchesFollowup =
   !window.showPendingFollowups ||
   c.nextFollowup === today;
 
 
-  return matchesSearch && matchesType && matchesFollowup;
+  return matchesSearch && matchesCity && matchesFollowup;
 });
       
 
