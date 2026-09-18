@@ -318,10 +318,12 @@ const matchesFollowup =
   !window.showPendingFollowups ||
   c.nextFollowup === today;
 
-
-  return matchesSearch && matchesCity && matchesFollowup;
+const matchesType =
+  !window.contactTypeFilter ||
+  c.contactType === window.contactTypeFilter;
+ return matchesSearch && matchesCity && matchesFollowup && matchesType;
 });
-      
+   
 
    $("clientCount").textContent =
   filtered.filter(c => c.contactType === "Cliente").length;
@@ -851,6 +853,8 @@ $("adminUsersList").querySelectorAll(".admin-renovar").forEach(btn => {
   $("closeModalBtn").onclick = closeModal;
   $("searchInput").oninput = render;
   $("typeFilter").onchange = render;
+
+  
   $("contactForm").addEventListener("submit", saveContact);
 
   $("logoutBtn").onclick = async () => {
@@ -899,6 +903,7 @@ if (clientCard) {
 
   clientCard.onclick = () => {
     $("typeFilter").value = "Cliente";
+    window.contactTypeFilter = "Cliente";
     window.showPendingFollowups = false;
 
     clearStatSelection();
@@ -915,6 +920,7 @@ if (prospectCard) {
 
   prospectCard.onclick = () => {
     $("typeFilter").value = "Prospecto";
+    window.contactTypeFilter = "Prospecto";
     window.showPendingFollowups = false;
 
     clearStatSelection();
