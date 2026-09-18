@@ -300,7 +300,7 @@ function actualizarFiltroCiudades() {
 actualizarFiltroCiudades();
     
     const search = $("searchInput").value.trim().toLowerCase();
-    const city = $("typeFilter").value;
+   const city = $("cityFilter").value;
 
     const today = new Date().toISOString().split("T")[0];
 
