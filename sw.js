@@ -1,4 +1,4 @@
-const CACHE_NAME = "jimbus-v12";
+const CACHE_NAME = "jimbus-v13";
 
 const APP_FILES = [
   "./",
