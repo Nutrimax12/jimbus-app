@@ -902,7 +902,7 @@ if (clientCard) {
   clientCard.style.cursor = "pointer";
 
   clientCard.onclick = () => {
-    $("typeFilter").value = "Cliente";
+  
     window.contactTypeFilter = "Cliente";
     window.showPendingFollowups = false;
 
@@ -919,7 +919,7 @@ if (prospectCard) {
   prospectCard.style.cursor = "pointer";
 
   prospectCard.onclick = () => {
-    $("typeFilter").value = "Prospecto";
+   
     window.contactTypeFilter = "Prospecto";
     window.showPendingFollowups = false;
 
