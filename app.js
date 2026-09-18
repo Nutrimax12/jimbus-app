@@ -323,14 +323,14 @@ const matchesFollowup =
 });
       
 
-    $("clientCount").textContent =
-      contacts.filter(c => c.contactType === "Cliente").length;
+   $("clientCount").textContent =
+  filtered.filter(c => c.contactType === "Cliente").length;
 
-    $("prospectCount").textContent =
-      contacts.filter(c => c.contactType === "Prospecto").length;
+$("prospectCount").textContent =
+  filtered.filter(c => c.contactType === "Prospecto").length;
 
 $("followupCount").textContent =
-  contacts.filter(c => c.nextFollowup === today).length;
+  filtered.filter(c => c.nextFollowup === today).length;
 
     $("emptyState").style.display =
       contacts.length === 0 ? "block" : "none";
