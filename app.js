@@ -498,7 +498,24 @@ if (ciudadContacto && !ciudadesFijas.includes(ciudadContacto)) {
 }
 
 $("city").value = ciudadContacto;
+$("city").onchange = function() {
+  if (this.value === "Otra") {
+    const nuevaCiudad = prompt("Escribe el nombre de la nueva ciudad:");
 
+    if (nuevaCiudad && nuevaCiudad.trim()) {
+      const ciudad = nuevaCiudad.trim();
+      const option = document.createElement("option");
+      option.value = ciudad;
+      option.textContent = ciudad;
+      this.insertBefore(option, this.lastElementChild);
+      this.value = ciudad;
+    } else {
+      this.value = "";
+    }
+  }
+};
+
+    
     
     $("zone").value = contact?.zone || "";
     $("contactType").value = contact?.contactType || "Cliente";
