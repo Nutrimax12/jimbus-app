@@ -266,7 +266,7 @@ async function loadContacts() {
     render();
   }
 function actualizarFiltroCiudades() {
-  const selector = $("typeFilter");
+ const selector = $("cityFilter");
   const valorActual = selector.value;
 
   const ciudades = [];
