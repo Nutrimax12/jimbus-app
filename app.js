@@ -722,7 +722,8 @@ if (
 }
 
 currentUser = user;
-  alert("Usuario conectado: " + currentUser.email + " | ID: " + currentUser.id);
+  await loadContacts();
+alert("PRUEBA: loadContacts terminó");
  if (perfil.rol === "admin") {
   $("adminUsersBtn").style.display = "inline-block";
 
