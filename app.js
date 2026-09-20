@@ -262,7 +262,7 @@ async function loadContacts() {
       return;
     }
 
-  alert("Contactos recibidos de Supabase: " + (data ? data.length : 0));
+ 
     contacts = (data || []).map(dbToContact);
     render();
   }
@@ -723,7 +723,7 @@ if (
 
 currentUser = user;
   await loadContacts();
-alert("PRUEBA: loadContacts terminó");
+
  if (perfil.rol === "admin") {
   $("adminUsersBtn").style.display = "inline-block";
 
