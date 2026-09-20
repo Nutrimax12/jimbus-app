@@ -721,6 +721,7 @@ if (
 }
 
 currentUser = user;
+  alert("Usuario conectado: " + currentUser.email + " | ID: " + currentUser.id);
  if (perfil.rol === "admin") {
   $("adminUsersBtn").style.display = "inline-block";
 
