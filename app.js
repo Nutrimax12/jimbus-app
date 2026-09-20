@@ -317,8 +317,19 @@ const filtered = contacts.filter(c => {
       String(v || "").toLowerCase().includes(search)
     );
 
+const normalizarCiudad = nombre => {
+  const ciudadNormalizada = (nombre || "").trim().toLowerCase();
+
+  if (ciudadNormalizada === "bogotá d.c." || ciudadNormalizada === "bogota d.c.") {
+    return "bogotá";
+  }
+
+  return ciudadNormalizada;
+};
+
 const matchesCity =
-  !city || (c.city || "").trim().toLowerCase() === city.toLowerCase();
+  !city || normalizarCiudad(c.city) === normalizarCiudad(city);
+  
 
 const matchesFollowup =
   !window.showPendingFollowups ||
