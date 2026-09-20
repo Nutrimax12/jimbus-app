@@ -855,7 +855,7 @@ $("adminUsersList").querySelectorAll(".admin-renovar").forEach(btn => {
   $("emptyNewBtn").onclick = () => openModal();
   $("closeModalBtn").onclick = closeModal;
   $("searchInput").oninput = render;
-
+$("cityFilter").onchange = render;
 
   
   $("contactForm").addEventListener("submit", saveContact);
