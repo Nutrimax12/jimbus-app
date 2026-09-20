@@ -262,6 +262,7 @@ async function loadContacts() {
       return;
     }
 
+  alert("Contactos recibidos de Supabase: " + (data ? data.length : 0));
     contacts = (data || []).map(dbToContact);
     render();
   }
