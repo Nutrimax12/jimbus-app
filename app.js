@@ -574,12 +574,23 @@ if (currentContact && currentContact.notes) {
     finalNotes = oldNotes;
   }
 }
+  let ciudadGuardar = $("city").value.trim();
+
+if (
+  ciudadGuardar.toLowerCase() === "bogotá d.c." ||
+  ciudadGuardar.toLowerCase() === "bogota d.c." ||
+  ciudadGuardar.toLowerCase() === "bogota"
+) {
+  ciudadGuardar = "Bogotá";
+}
+    
+    
     const payload = {
       negocio: $("businessName").value.trim(),
       encargado: $("contactName").value.trim(),
       telefono: $("phone").value.trim(),
       direccion: $("address").value.trim() || null,
-      ciudad: $("city").value.trim() || null,
+      ciudad: ciudadGuardar || null,
       barrio: $("zone").value.trim() || null,
       tipo: $("contactType").value,
       proximo_seguimiento: $("nextFollowup").value || null,
