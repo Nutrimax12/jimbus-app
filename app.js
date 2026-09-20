@@ -273,7 +273,12 @@ function actualizarFiltroCiudades() {
   const ciudades = [];
 
   contacts.forEach(c => {
-    const ciudad = (c.city || "").trim();
+    let ciudad = (c.city || "").trim();
+
+if (ciudad.toLowerCase() === "bogotá d.c." ||
+    ciudad.toLowerCase() === "bogotá") {
+  ciudad = "Bogotá";
+}
     if (!ciudad) return;
 
     const existe = ciudades.some(
